@@ -3,9 +3,10 @@ package med.voll.api.controller;
 import med.voll.api.dto.DadosCadastroMedicoDTO;
 import med.voll.api.dto.DadosListagemMedicoDTO;
 import med.voll.api.service.MedicoService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/medico")
@@ -23,8 +24,8 @@ public class MedicoController {
     }
 
     @GetMapping
-    public List<DadosListagemMedicoDTO> listar() {
-        return medicoService.findAll();
+    public Page<DadosListagemMedicoDTO> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
+        return medicoService.findAll(paginacao);
     }
 
 }
