@@ -5,9 +5,10 @@ import med.voll.api.dto.DadosListagemMedicoDTO;
 import med.voll.api.mapper.MedicoMapper;
 import med.voll.api.model.Medico;
 import med.voll.api.repository.MedicoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,10 +24,9 @@ public class MedicoService {
         return medicoRepository.save(MedicoMapper.toMedico(medicoDTO));
     }
 
-    public List<DadosListagemMedicoDTO> findAll(){
-        return medicoRepository.findAll().stream()
-                .map(MedicoMapper::toDadosListagemMedicoDTO)
-                .collect(Collectors.toList());
+    public Page<DadosListagemMedicoDTO> findAll(Pageable paginacao){
+        return medicoRepository.findAll(paginacao)
+                .map(MedicoMapper::toDadosListagemMedicoDTO);
     }
 
 }
