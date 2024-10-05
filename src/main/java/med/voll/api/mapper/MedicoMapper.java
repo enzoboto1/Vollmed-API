@@ -2,6 +2,7 @@ package med.voll.api.mapper;
 
 import med.voll.api.dto.DadosCadastroMedicoDTO;
 import med.voll.api.dto.DadosEnderecoDTO;
+import med.voll.api.dto.DadosListagemMedicoDTO;
 import med.voll.api.model.Endereco;
 import med.voll.api.model.Medico;
 
@@ -52,6 +53,19 @@ public class MedicoMapper {
                         medico.getEndereco().getNumero(),
                         medico.getEndereco().getComplemento()
                 )
+        );
+    }
+
+    public static DadosListagemMedicoDTO toDadosListagemMedicoDTO(Medico medico) {
+        if (medico == null) {
+            return null;
+        }
+
+        return new DadosListagemMedicoDTO(
+                medico.getNome(),
+                medico.getEmail(),
+                medico.getCrm(),
+                medico.getEspecialidade()
         );
     }
 }
