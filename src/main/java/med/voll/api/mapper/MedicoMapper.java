@@ -61,11 +61,6 @@ public class MedicoMapper {
             return null;
         }
 
-        return new DadosListagemMedicoDTO(
-                medico.getNome(),
-                medico.getEmail(),
-                medico.getCrm(),
-                medico.getEspecialidade()
-        );
+        return new DadosListagemMedicoDTO(medico);
     }
 }
