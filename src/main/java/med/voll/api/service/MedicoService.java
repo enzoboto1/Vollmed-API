@@ -9,8 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.stream.Collectors;
-
 @Service
 public class MedicoService {
 
@@ -24,7 +22,7 @@ public class MedicoService {
         return medicoRepository.save(MedicoMapper.toMedico(medicoDTO));
     }
 
-    public Page<DadosListagemMedicoDTO> findAll(Pageable paginacao){
+    public Page<DadosListagemMedicoDTO> findAll(Pageable paginacao) {
         return medicoRepository.findAll(paginacao)
                 .map(MedicoMapper::toDadosListagemMedicoDTO);
     }
