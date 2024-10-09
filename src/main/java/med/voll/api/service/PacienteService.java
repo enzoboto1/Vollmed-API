@@ -25,4 +25,8 @@ public class PacienteService {
         return pacienteRepository.findAll(paginacao).map(PacienteMapper::toDadosListagemPacienteDTO);
     }
 
+    public void delete(Long id) {
+        pacienteRepository.deleteById(id);
+    }
+
 }
