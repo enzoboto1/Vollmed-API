@@ -7,6 +7,7 @@ import med.voll.api.dto.DadosListagemMedicoDTO;
 import med.voll.api.mapper.EnderecoMapper;
 import med.voll.api.mapper.MedicoMapper;
 import med.voll.api.model.Medico;
+import med.voll.api.model.Paciente;
 import med.voll.api.repository.MedicoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -79,6 +80,12 @@ public class MedicoService {
 
     public void delete(Long id) {
         medicoRepository.deleteById(id);
+    }
+
+    public void deleteLogica(Long id) {
+        Medico medico = medicoRepository.getReferenceById(id);
+        medico.setAtivo(false);
+        medicoRepository.save(medico);
     }
 
 }
