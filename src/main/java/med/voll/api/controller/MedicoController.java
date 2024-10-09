@@ -44,4 +44,10 @@ public class MedicoController {
         medicoService.delete(id);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluirLogico(@PathVariable Long id){
+        medicoService.deleteLogica(id);
+    }
+
 }
