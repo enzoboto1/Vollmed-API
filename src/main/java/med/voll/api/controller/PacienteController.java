@@ -1,5 +1,6 @@
 package med.voll.api.controller;
 
+import jakarta.transaction.Transactional;
 import med.voll.api.dto.DadosCadastroPacienteDTO;
 import med.voll.api.dto.DadosListagemPacienteDTO;
 import med.voll.api.service.PacienteService;
@@ -26,6 +27,12 @@ public class PacienteController {
     @GetMapping
     public Page<DadosListagemPacienteDTO> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
         return pacienteService.findAll(paginacao);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){
+        pacienteService.delete(id);
     }
 
 }
