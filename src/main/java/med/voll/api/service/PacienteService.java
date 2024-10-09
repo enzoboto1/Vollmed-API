@@ -3,6 +3,7 @@ package med.voll.api.service;
 import med.voll.api.dto.DadosCadastroPacienteDTO;
 import med.voll.api.dto.DadosListagemPacienteDTO;
 import med.voll.api.mapper.PacienteMapper;
+import med.voll.api.model.Paciente;
 import med.voll.api.repository.PacienteRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +28,12 @@ public class PacienteService {
 
     public void delete(Long id) {
         pacienteRepository.deleteById(id);
+    }
+
+    public void deleteLogica(Long id) {
+        Paciente paciente = pacienteRepository.getReferenceById(id);
+        paciente.setAtivo(false);
+        pacienteRepository.save(paciente);
     }
 
 }
