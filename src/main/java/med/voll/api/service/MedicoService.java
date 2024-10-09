@@ -77,4 +77,8 @@ public class MedicoService {
         }
     }
 
+    public void delete(Long id) {
+        medicoRepository.deleteById(id);
+    }
+
 }
