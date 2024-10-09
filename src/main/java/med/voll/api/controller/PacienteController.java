@@ -35,4 +35,10 @@ public class PacienteController {
         pacienteService.delete(id);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluirLogico(@PathVariable Long id){
+        pacienteService.deleteLogica(id);
+    }
+
 }
