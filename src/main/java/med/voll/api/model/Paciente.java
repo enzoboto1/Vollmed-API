@@ -15,6 +15,7 @@ public class Paciente {
     private String email;
     private String cpf;
     private String telefone;
+    private Boolean ativo;
 
     @Embedded
     private Endereco endereco;
