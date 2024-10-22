@@ -21,16 +21,19 @@ public class PacienteMapper {
         paciente.setEmail(dto.email());
         paciente.setCpf(dto.cpf());
         paciente.setTelefone(dto.telefone());
+        paciente.setAtivo(true);
 
-        Endereco endereco = new Endereco();
-        endereco.setLogradouro(dto.endereco().logradouro());
-        endereco.setBairro(dto.endereco().bairro());
-        endereco.setCep(dto.endereco().cep());
-        endereco.setNumero(dto.endereco().numero());
-        endereco.setComplemento(dto.endereco().complemento());
-        endereco.setCidade(dto.endereco().cidade());
-        endereco.setUf(dto.endereco().uf());
-        paciente.setEndereco(endereco);
+        if(dto.endereco() != null){
+            Endereco endereco = new Endereco();
+            endereco.setLogradouro(dto.endereco().logradouro());
+            endereco.setBairro(dto.endereco().bairro());
+            endereco.setCep(dto.endereco().cep());
+            endereco.setNumero(dto.endereco().numero());
+            endereco.setComplemento(dto.endereco().complemento());
+            endereco.setCidade(dto.endereco().cidade());
+            endereco.setUf(dto.endereco().uf());
+            paciente.setEndereco(endereco);
+        }
 
         return paciente;
     }
