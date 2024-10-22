@@ -18,6 +18,7 @@ public class MedicoMapper {
         medico.setEmail(dados.email());
         medico.setCrm(dados.crm());
         medico.setEspecialidade(dados.especialidade());
+        medico.setAtivo(true);
 
         if (dados.endereco() != null) {
             Endereco endereco = new Endereco();
