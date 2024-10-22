@@ -7,7 +7,6 @@ import med.voll.api.dto.DadosListagemMedicoDTO;
 import med.voll.api.mapper.EnderecoMapper;
 import med.voll.api.mapper.MedicoMapper;
 import med.voll.api.model.Medico;
-import med.voll.api.model.Paciente;
 import med.voll.api.repository.MedicoRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,12 +21,12 @@ public class MedicoService {
         this.medicoRepository = medicoRepository;
     }
 
-    public Medico save(DadosCadastroMedicoDTO medicoDTO) {
-        return medicoRepository.save(MedicoMapper.toMedico(medicoDTO));
+    public void save(DadosCadastroMedicoDTO medicoDTO) {
+        medicoRepository.save(MedicoMapper.toMedico(medicoDTO));
     }
 
-    public Page<DadosListagemMedicoDTO> findAll(Pageable paginacao) {
-        return medicoRepository.findAll(paginacao)
+    public Page<DadosListagemMedicoDTO> findAllByAtivoTrue(Pageable paginacao) {
+        return medicoRepository.findAllByAtivoTrue(paginacao)
                 .map(MedicoMapper::toDadosListagemMedicoDTO);
     }
 
@@ -82,7 +81,7 @@ public class MedicoService {
         medicoRepository.deleteById(id);
     }
 
-    public void deleteLogica(Long id) {
+    public void deleteLogico(Long id) {
         Medico medico = medicoRepository.getReferenceById(id);
         medico.setAtivo(false);
         medicoRepository.save(medico);
