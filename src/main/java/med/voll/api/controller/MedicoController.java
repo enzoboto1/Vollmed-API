@@ -27,27 +27,27 @@ public class MedicoController {
         medicoService.save(medicoDTO);
     }
 
-    @GetMapping
+    @GetMapping("/listarTodos")
     public Page<DadosListagemMedicoDTO> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
-        return medicoService.findAll(paginacao);
+        return medicoService.findAllByAtivoTrue(paginacao);
     }
 
-    @PutMapping
+    @PutMapping("/atualizar")
     @Transactional
     public void atualizar(@RequestBody @Valid DadosAtualizacaoMedicoDTO dados) {
         medicoService.update(dados);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletar/{id}")
     @Transactional
     public void excluir(@PathVariable Long id){
         medicoService.delete(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteLogico/{id}")
     @Transactional
     public void excluirLogico(@PathVariable Long id){
-        medicoService.deleteLogica(id);
+        medicoService.deleteLogico(id);
     }
 
 }
