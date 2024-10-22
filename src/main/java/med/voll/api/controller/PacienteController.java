@@ -1,6 +1,9 @@
 package med.voll.api.controller;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import med.voll.api.dto.DadosAtualizacaoMedicoDTO;
+import med.voll.api.dto.DadosAtualizacaoPacienteDTO;
 import med.voll.api.dto.DadosCadastroPacienteDTO;
 import med.voll.api.dto.DadosListagemPacienteDTO;
 import med.voll.api.service.PacienteService;
@@ -24,18 +27,24 @@ public class PacienteController {
         pacienteService.save(dados);
     }
 
-    @GetMapping
+    @GetMapping("listarTodos")
     public Page<DadosListagemPacienteDTO> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
         return pacienteService.findAll(paginacao);
     }
 
-    @DeleteMapping("/{id}")
+    @PutMapping("/atualizar")
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizacaoPacienteDTO dados) {
+        pacienteService.update(dados);
+    }
+
+    @DeleteMapping("/deletar/{id}")
     @Transactional
     public void excluir(@PathVariable Long id){
         pacienteService.delete(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteLogico/{id}")
     @Transactional
     public void excluirLogico(@PathVariable Long id){
         pacienteService.deleteLogica(id);
